@@ -2,7 +2,6 @@ import pygame
 import sys
 import os
 os.listdir()
-# some comment
 
 pygame.init()
 pygame.mixer.init()
@@ -11,6 +10,7 @@ SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
 rows = 9
 columns = 8
+# collision_sound = pygame.mixer.Sound("doorhit-98828")
 
 SCREENCOLOR = (10, 10, 30)
 BALL = (30, 0, 255)
@@ -36,7 +36,7 @@ brick_height = 20
 brick_color = (146, 62, 230)  
 
 #sounds
-#hitsound = pygame.mixer.Sound("gameballtap.wav")
+# hitsound = pygame.mixer.Sound("doorhit-98828")
 
 bricks = []
 for row in range(rows):
@@ -51,6 +51,10 @@ def draw_bricks():
         pygame.draw.rect(screen, brick_color, brick)
         pygame.draw.rect(screen, SCREENCOLOR, brick, 2)
 
+    font = pygame.font.Font(None, 100)
+    score_text = font.render("{}".format(count), True, (255, 245, 207))
+    screen.blit(score_text, (230, 250))
+
 def break_brick():
     global ball_speed, count
     for brick in bricks:
@@ -59,7 +63,7 @@ def break_brick():
             ball_speed[1] = -ball_speed[1]
             count += 1
             print('Score:', count)
-#            hitsound.play()
+            # hitsound.play()
 count = 0
 
 ball = pygame.Rect(SCREEN_WIDTH // 2 - ball_radius, SCREEN_HEIGHT // 2 - ball_radius, ball_radius * 2, ball_radius * 2)
@@ -110,4 +114,3 @@ while True:
     pygame.display.flip()
 
     pygame.time.Clock().tick(100)
-
